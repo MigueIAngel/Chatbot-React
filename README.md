@@ -1,54 +1,100 @@
-# React + TypeScript + Vite
+# Wizybot - Interactive Chatbot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and interactive chatbot interface built with React, TypeScript, and Vite. The chatbot features a clean UI, loading animations, and product recommendation capabilities.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js (v14 or higher)
+- npm or yarn
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:
+\`\`\`bash
+git clone https://github.com/yourusername/wizybot.git
+cd wizybot
+\`\`\`
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. Install dependencies:
+\`\`\`bash
+npm install
+# or
+yarn
+\`\`\`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To start the development server:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+\`\`\`bash
+npm run dev
+# or
+yarn dev
+\`\`\`
+
+This will start the development server at `http://localhost:5173` (or another port if 5173 is in use).
+
+## Building for Production
+
+To build the project for production:
+
+\`\`\`bash
+npm run build
+# or
+yarn build
+\`\`\`
+
+The build output will be in the `dist` directory.
+
+## Preview Production Build
+
+To preview the production build locally:
+
+\`\`\`bash
+npm run preview
+# or
+yarn preview
+\`\`\`
+
+## Project Structure
+
+\`\`\`
+wizybot/
+├── public/              # Static assets
+├── src/                 # Source files
+│   ├── components/      # React components
+│   │   ├── ChatbotIcon.tsx
+│   │   ├── ChatForm.tsx
+│   │   ├── ChatMessage.tsx
+│   │   ├── LoadingAnimation.tsx
+│   │   └── ProductRecomendations.tsx
+│   ├── App.tsx          # Main application component
+│   ├── index.css        # Global styles
+│   └── main.tsx         # Entry point
+├── index.html           # HTML template
+├── tsconfig.json        # TypeScript configuration
+├── vite.config.ts       # Vite configuration
+└── README.md            # Project documentation
+\`\`\`
+
+## Usage
+
+The chatbot can be triggered by clicking the chat button in the bottom right corner of the screen. Users can type messages and receive responses from the bot.
+
+### Special Commands
+
+- Type "I want product recommendations" to see a carousel of product recommendations.
+
+## Customization
+
+### Changing the Bot Responses
+
+You can modify the bot responses by editing the `responses` array in the `generateBotResponse` function in `App.tsx`.
+
+### Styling
+
+The chatbot's appearance can be customized by modifying the CSS in `index.css`. The color scheme uses primary colors of `#191d40` and `#3b589e`.
+
+## License
+
+MIT
