@@ -11,7 +11,7 @@ A responsive and interactive chatbot interface built with React, TypeScript, and
 
 1. Clone the repository:
 \`\`\`bash
-git clone https://github.com/yourusername/wizybot.git
+git clone https://github.com/MigueIAngel/wizybot.git
 cd wizybot
 \`\`\`
 
@@ -96,5 +96,4 @@ You can modify the bot responses by editing the `responses` array in the `genera
 The chatbot's appearance can be customized by modifying the CSS in `index.css`. The color scheme uses primary colors of `#191d40` and `#3b589e`.
 
 ## License
-
-MIT
+Miguel Angel Altamar Rodriguez
