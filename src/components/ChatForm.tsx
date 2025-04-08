@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import { Dispatch, SetStateAction } from "react";
-
+import { JSX } from "react";
 interface Message {
     role: string;
-    content: string;
+    content: string | JSX.Element;
 }
 
 interface ChatFormProps {
     setChatHistory: Dispatch<SetStateAction<Message[]>>;
-    generateBotResponse: () => Promise<Message>;
+    generateBotResponse: (history: string) => Promise<Message>;
 }
 
 export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFormProps) {
@@ -18,19 +18,28 @@ export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFo
         const userMessage = inputRef.current ? inputRef.current.value.trim() : '';
         if (inputRef.current) {
             inputRef.current.value = '';
+            inputRef.current.disabled = true;
         }
+        
         setChatHistory(history => [
             ...history, { role: 'user', content: userMessage }])
 
         setTimeout(() => setChatHistory(history => [
             ...history, { role: 'bot', content: "..." }]), 500);
-        setTimeout(() => generateBotResponse().then((botMessage) => {
+        setTimeout(() => generateBotResponse(userMessage.toString()).then((botMessage) => {
             setChatHistory(history => {
                 const updatedHistory = [...history];
                 updatedHistory[updatedHistory.length - 1] = botMessage;
                 return updatedHistory;
             });
         }), 3000);
+        setTimeout(() => {
+            if (inputRef.current) {
+                inputRef.current.disabled = false;
+                inputRef.current.focus();
+            }
+        }, 4000);
+        
     }
     return (
         <form action="#" className="chat-form" onSubmit={handleSubmit}>
