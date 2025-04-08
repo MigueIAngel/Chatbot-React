@@ -58,24 +58,23 @@ yarn preview
 
 ## Project Structure
 
-\`\`\`
-wizybot/
-├── public/              # Static assets
-├── src/                 # Source files
-│   ├── components/      # React components
-│   │   ├── ChatbotIcon.tsx
-│   │   ├── ChatForm.tsx
-│   │   ├── ChatMessage.tsx
-│   │   ├── LoadingAnimation.tsx
-│   │   └── ProductRecomendations.tsx
-│   ├── App.tsx          # Main application component
-│   ├── index.css        # Global styles
-│   └── main.tsx         # Entry point
-├── index.html           # HTML template
-├── tsconfig.json        # TypeScript configuration
-├── vite.config.ts       # Vite configuration
-└── README.md            # Project documentation
-\`\`\`
+wizybot/  
+├── public/              # Static assets  
+├── src/                 # Source files  
+│   ├── components/      # React components  
+│   │   ├── ChatbotIcon.tsx  
+│   │   ├── ChatForm.tsx  
+│   │   ├── ChatMessage.tsx  
+│   │   ├── LoadingAnimation.tsx  
+│   │   └── ProductRecomendations.tsx  
+│   ├── App.tsx          # Main application component  
+│   ├── index.css        # Global styles  
+│   └── main.tsx         # Entry point  
+├── index.html           # HTML template  
+├── tsconfig.json        # TypeScript configuration  
+├── vite.config.ts       # Vite configuration  
+└── README.md            # Project documentation  
+
 
 ## Usage
 
