@@ -1,7 +1,21 @@
+import { useState } from "react";
 import ChatbotIcon from "./components/ChatbotIcon"
 import ChatForm from "./components/ChatForm"
+import ChatMessage from "./components/ChatMessage";
 
 function App() {
+    type Message = {
+        role: string;
+        content: string;
+    };
+    function generateBotResponse() : Promise<Message> {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({ role: "bot", content: "This is a bot response!" });
+            }, 1000);
+        });
+    }
+    const [chatHistory, setChatHistory] = useState<Message[]>([]);
     return (
         <div className="container">
             <div className="chatbot-popup">
@@ -21,15 +35,14 @@ function App() {
                             Hello there! Do you need any help?
                         </p>
                     </div>
-                    <div className="message user-message">
-                        <p className="message-text">
-                            lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                        </p>
-                    </div>
+                    {chatHistory.map((chat,index)=>(
+                        <ChatMessage key={index} chat={chat}/>
+                    ))}
+                    
                 </div>
                 {/* Footer*/}
                 <div className="chat-footer">
-                    <ChatForm />
+                    <ChatForm setChatHistory={setChatHistory} generateBotResponse= {generateBotResponse} />
                 </div>
             </div>
         </div>

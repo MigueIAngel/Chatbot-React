@@ -1,12 +1,36 @@
 import { useRef } from "react";
-export default function ChatForm() {
+import { Dispatch, SetStateAction } from "react";
+
+interface Message {
+    role: string;
+    content: string;
+}
+
+interface ChatFormProps {
+    setChatHistory: Dispatch<SetStateAction<Message[]>>;
+    generateBotResponse: () => Promise<Message>;
+}
+
+export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFormProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         const userMessage = inputRef.current ? inputRef.current.value.trim() : '';
-        if (!userMessage) return;
-        console.log(userMessage);
-        
+        if (inputRef.current) {
+            inputRef.current.value = '';
+        }
+        setChatHistory(history => [
+            ...history, { role: 'user', content: userMessage }])
+
+        setTimeout(() => setChatHistory(history => [
+            ...history, { role: 'bot', content: "..." }]), 500);
+        setTimeout(() => generateBotResponse().then((botMessage) => {
+            setChatHistory(history => {
+                const updatedHistory = [...history];
+                updatedHistory[updatedHistory.length - 1] = botMessage;
+                return updatedHistory;
+            });
+        }), 3000);
     }
     return (
         <form action="#" className="chat-form" onSubmit={handleSubmit}>

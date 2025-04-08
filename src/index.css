@@ -81,6 +81,8 @@ body {
     overflow-y: auto;
     padding: 25px 22px;
     margin-bottom: 82px;
+    scrollbar-width: thin;
+    scrollbar-color: #e0e0e0 transparent;
 }
 
 .chatbot-body .message {
