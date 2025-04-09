@@ -14,13 +14,14 @@ interface Message {
 interface ChatFormProps {
   setChatHistory: Dispatch<SetStateAction<Message[]>>
   generateBotResponse: (history: string) => Promise<Message>
+  scrollToBottom: () => void
 }
 
 /**
  * ChatForm component handles user input and message submission
  * Manages the flow of sending messages and receiving responses
  */
-export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFormProps) {
+export default function ChatForm({ setChatHistory, generateBotResponse, scrollToBottom }: ChatFormProps) {
   // Reference to the input field for direct manipulation
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -41,13 +42,16 @@ export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFo
 
     // Add user message to chat history
     setChatHistory((history) => [...history, { role: "user", content: userMessage }])
-
     // Add loading animation after a short delay
-    setTimeout(() => setChatHistory((history) => [...history, { role: "bot", content: <LoadingAnimation /> }]), 500)
-
+    setTimeout(() => {
+      setChatHistory((history) => [...history, { role: "bot", content: <LoadingAnimation /> }])
+      scrollToBottom()
+    }, 500)
+    scrollToBottom()
     // Generate bot response after a delay to simulate processing
     setTimeout(
       () =>
+        
         generateBotResponse(userMessage.toString()).then((botMessage) => {
           // Replace loading animation with actual response
           setChatHistory((history) => {
@@ -55,6 +59,7 @@ export default function ChatForm({ setChatHistory, generateBotResponse }: ChatFo
             updatedHistory[updatedHistory.length - 1] = botMessage
             return updatedHistory
           })
+          scrollToBottom()
         }),
       3000,
     )

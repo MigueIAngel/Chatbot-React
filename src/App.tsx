@@ -1,8 +1,5 @@
-"use client"
-
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useRef } from "react"
 import ChatbotIcon from "./components/ChatbotIcon"
 import ChatForm from "./components/ChatForm"
 import ChatMessage from "./components/ChatMessage"
@@ -19,6 +16,19 @@ const App: React.FC = () => {
   const [chatHistory, setChatHistory] = useState<Message[]>([])
   // State to control chatbot visibility
   const [isChatbotOpen, setIsChatbotOpen] = useState(false)
+
+  // Reference to the chat body for auto-scrolling
+  const chatBodyRef = useRef<HTMLDivElement>(null)
+
+  // Function to scroll chat to bottom
+  const scrollToBottom = () => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTo({
+        top: chatBodyRef.current.scrollHeight + 100,
+        behavior: "smooth",
+      })
+    }
+  }
 
   // Message type definition for chat history
   type Message = {
@@ -88,7 +98,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Chat messages area */}
-          <div className="chatbot-body">
+          <div className="chatbot-body" ref={chatBodyRef}>
             <div className="message bot-message">
               <ChatbotIcon />
               <p className="message-text">Hello there! Do you need any help?</p>
@@ -100,7 +110,11 @@ const App: React.FC = () => {
             ))}
           </div>
           <div className="chat-footer">
-            <ChatForm setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+            <ChatForm
+              setChatHistory={setChatHistory}
+              generateBotResponse={generateBotResponse}
+              scrollToBottom={scrollToBottom}
+            />
           </div>
         </div>
       </div>
