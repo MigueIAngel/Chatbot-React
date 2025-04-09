@@ -1,9 +1,14 @@
+"use client"
+
+import type React from "react"
+
 import { useState } from "react"
 import ChatbotIcon from "./components/ChatbotIcon"
 import ChatForm from "./components/ChatForm"
 import ChatMessage from "./components/ChatMessage"
 import ProductRecomendations from "./components/ProductRecomendations"
 import type { JSX } from "react"
+import LandingPage from "./components/LandingPage"
 
 /**
  * Main App component that manages the chatbot interface
@@ -60,43 +65,46 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`container ${isChatbotOpen ? "show-chatbot" : ""}`}>
-      {/* Chatbot toggle button */}
-      <button onClick={() => setIsChatbotOpen((prev) => !prev)} id="chatbot-toggler">
-        <span className="material-symbols-rounded">chat</span>
-        <span className="material-symbols-rounded">close</span>
-      </button>
+    <>
+      <LandingPage />
+      <div className={`container ${isChatbotOpen ? "show-chatbot" : ""}`}>
+        {/* Chatbot toggle button */}
+        <button onClick={() => setIsChatbotOpen((prev) => !prev)} id="chatbot-toggler">
+          <span className="material-symbols-rounded">chat</span>
+          <span className="material-symbols-rounded">close</span>
+        </button>
 
-      {/* Chatbot popup container */}
-      <div className="chatbot-popup">
-        {/* Header */}
-        <div className="chat-header">
-          <div className="chat-info">
-            <ChatbotIcon />
-            <h2 className="logo-text">Wizybot</h2>
-          </div>
-          <button onClick={() => setIsChatbotOpen((prev) => !prev)} className="material-symbols-rounded">
-            keyboard_arrow_down
-          </button>
-        </div>
-
-        {/* Chat messages area */}
-        <div className="chatbot-body">
-          <div className="message bot-message">
-            <ChatbotIcon />
-            <p className="message-text">Hello there! Do you need any help?</p>
+        {/* Chatbot popup container */}
+        <div className="chatbot-popup">
+          {/* Header */}
+          <div className="chat-header">
+            <div className="chat-info">
+              <ChatbotIcon />
+              <h2 className="logo-text">Wizybot</h2>
+            </div>
+            <button onClick={() => setIsChatbotOpen((prev) => !prev)} className="material-symbols-rounded">
+              keyboard_arrow_down
+            </button>
           </div>
 
-          {/* Render chat history */}
-          {chatHistory.map((chat, index) => (
-            <ChatMessage key={index} chat={chat} />
-          ))}
-        </div>
-        <div className="chat-footer">
-          <ChatForm setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+          {/* Chat messages area */}
+          <div className="chatbot-body">
+            <div className="message bot-message">
+              <ChatbotIcon />
+              <p className="message-text">Hello there! Do you need any help?</p>
+            </div>
+
+            {/* Render chat history */}
+            {chatHistory.map((chat, index) => (
+              <ChatMessage key={index} chat={chat} />
+            ))}
+          </div>
+          <div className="chat-footer">
+            <ChatForm setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
